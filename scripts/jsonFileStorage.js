@@ -12,7 +12,6 @@ export function write(filename, jsonContentObj, callback) {
   // Convert content object to string before writing
   console.log("inside write");
   const jsonContentStr = JSON.stringify(jsonContentObj);
-  console.log(jsonContentStr);
 
   // Write content to DB
   writeFile(filename, jsonContentStr, (writeErr) => {
@@ -24,7 +23,6 @@ export function write(filename, jsonContentObj, callback) {
     }
     console.log("Write success!");
     // Call client-provided callback on successful write
-    console.log(jsonContentStr);
     callback(null, jsonContentStr);
   });
 }
@@ -99,7 +97,7 @@ export function add(filename, key, input, callback) {
       // Exit if there was an error
       if (err) {
         console.error("Edit error", err);
-        callback(err);
+        callback(err, null);
         return;
       }
 
@@ -113,6 +111,39 @@ export function add(filename, key, input, callback) {
 
       // Add input element to target array
       jsonContentObj[key].push(input);
+    },
+    // Pass callback to edit to be called after edit completion
+    callback
+  );
+}
+
+export function remove(filename, key, index, callback) {
+  console.log("inside remove");
+  edit(
+    filename,
+    (err, jsonContentObj) => {
+      // Exit if there was an error
+      if (err) {
+        console.error("Edit error", err);
+        callback(err, null);
+        return;
+      }
+
+      // Exit if key does not exist in DB
+      if (!(key in jsonContentObj)) {
+        console.error("Key does not exist");
+        // Call callback with relevant error message to let client handle
+        callback("Key does not exist", null);
+        return;
+      }
+
+      if (jsonContentObj[key][index] === undefined) {
+        callback("Index does not exist", null);
+        return;
+      }
+
+      // remove index
+      jsonContentObj[key].splice(index, 1);
     },
     // Pass callback to edit to be called after edit completion
     callback

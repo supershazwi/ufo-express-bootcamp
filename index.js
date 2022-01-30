@@ -2,7 +2,7 @@ import express from "express";
 import methodOverride from "method-override";
 import slugify from "slugify";
 import moment from "moment";
-import { add, read, edit } from "./scripts/jsonFileStorage.js";
+import { add, read, edit, remove } from "./scripts/jsonFileStorage.js";
 
 const app = express();
 app.set("view engine", "ejs");
@@ -51,20 +51,26 @@ app.get("/shapes", (request, response) => {
 // CRUD SIGHTINGS
 
 app.delete("/sighting/:index/delete", (request, response) => {
-  edit(
-    "data.json",
-    (err, jsonContentObj) => {
-      // If no error, edit the content
-      if (!err) {
-        jsonContentObj["sightings"].splice(request.params.index, 1);
-      }
-    },
-    (err, jsonContentStr) => {
-      if (!err) {
+  console.log("inside crud delete");
+  remove("data.json", "sightings", request.params.index, (err, jsonContentObj) => {
+    if (!err) {
         response.redirect(`/`);
       }
-    }
-  );
+  });
+  // remove(
+  //   "data.json",
+  //   (err, jsonContentObj) => {
+  //     // If no error, edit the content
+  //     if (!err) {
+  //       jsonContentObj["sightings"].splice(request.params.index, 1);
+  //     }
+  //   },
+  //   (err, jsonContentStr) => {
+  //     if (!err) {
+  //       response.redirect(`/`);
+  //     }
+  //   }
+  // );
 });
 
 app.put("/sighting/:index/edit", (request, response) => {
