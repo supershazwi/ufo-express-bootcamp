@@ -1,6 +1,7 @@
 import express from "express";
 import methodOverride from "method-override";
 import slugify from "slugify";
+import moment from "moment";
 import { add, read, edit } from "./scripts/jsonFileStorage.js";
 
 const app = express();
@@ -106,6 +107,8 @@ app.get("/sighting/:index", (request, response) => {
         response.status(404).send("Sorry, we cannot find that!");
       } else {
         sighting.index = request.params.index;
+        sighting.created_at = moment(sighting.created_at).fromNow();
+        sighting.date_time = moment(sighting.date_time).format("dddd, MMMM Do YYYY");
         response.render("viewSighting", sighting);
       }
     }
