@@ -1,4 +1,14 @@
 {
+  "3": {
+    "text": "3",
+    "summary": "3",
+    "shape": "3",
+    "shapeSlug": "3",
+    "state": "3",
+    "city": "3",
+    "date_time": "2022-01-19T10:10",
+    "duration": "100 minutes"
+  },
   "sightings": [
     {
       "text": "Witnessed an orange, slow moving light. Was looking out my window and saw a orange colored, non blinking light floating across the night sky. Woke up my daughters to confirm what I was seeing. The object did not blink, was definitely not a helicopter. Very bright orange and moved slowly for about 2 minutes, disappeared behind the trees and did not see it again. Never seen anything like this in my life.",
@@ -6,6 +16,7 @@
       "city": "Black Mountain",
       "state": "NC",
       "shape": "Fireball",
+      "shapeSlug": "fireball",
       "duration": "2 minutes",
       "summary": "Witnessed an orange, slow moving light. Was looking out my window and saw a orange colored, non blinking light floating across the nigh"
     },
@@ -15,8 +26,19 @@
       "city": "Marin County",
       "state": "CA",
       "shape": "Sphere",
+      "shapeSlug": "sphere",
       "duration": "3 minutes",
       "summary": "Glowing lights in formation  just south of San Quentin"
+    },
+    {
+      "text": "Text",
+      "summary": "Summary",
+      "shape": "Shape",
+      "shapeSlug": "shape",
+      "state": "State",
+      "city": "City",
+      "date_time": "2022-01-30T19:12",
+      "duration": "10 minutes"
     }
   ]
 }
