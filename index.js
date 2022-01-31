@@ -7,6 +7,7 @@ import { add, read, edit, remove } from "./scripts/jsonFileStorage.js";
 import {
   incrementVisitCounter,
   checkWhetherUniqueVisitor,
+  checkDay,
 } from "./scripts/helpers.js";
 
 const app = express();
@@ -15,6 +16,9 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());
+app.on("listening", function () {
+  checkDay();
+});
 
 // CRUD SHAPES
 
@@ -245,6 +249,7 @@ app.post("/sighting", (request, response) => {
 });
 
 app.get("/", (request, response) => {
+  checkDay();
   const visits = incrementVisitCounter(request, response);
   const uniqueVisitorCounter = checkWhetherUniqueVisitor(request, response);
 
